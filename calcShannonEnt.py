@@ -57,11 +57,11 @@ def choose_best_feature_to_split(dataset):
         if info_gain > best_info_gain:
             best_info_gain = info_gain
             best_feature = i
-    return best_feature, feature_list
+    return best_feature
 
 
 my_dataset, my_labels = create_dataset()
-my_dataset_best_feature, my_feature_list = choose_best_feature_to_split(my_dataset)
+my_dataset_best_feature = choose_best_feature_to_split(my_dataset)
 print(my_dataset_best_feature)
 
 # my_second_dataset = split_dataset(my_dataset, 0, 1)  # 第一个元素是1的行拿出来，拿出来的行去除第一个元素
