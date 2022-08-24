@@ -31,8 +31,32 @@ def calc_shannon_ent(dataset):
     return shannon_ent
 
 
+# 当数据集第（axis-1）个元素等于value时，去除第（axis-1）个元素，把剩下的元素整合成一个新的数据集
+def split_dataset(dataset, axis, value):  # axis=0, value=1
+    ret_dataset = []
+    for line in dataset:
+        if line[axis] == value:
+            reduce_line = line[:axis]
+            reduce_line.extend(line[axis + 1:])
+            ret_dataset.append(reduce_line)
+    return ret_dataset
+
+
 my_dataset, my_labels = create_dataset()
 print(my_dataset)
 
 ShannonEnt = calc_shannon_ent(my_dataset)
 print(f"香农熵={ShannonEnt}.")
+
+my_second_dataset = split_dataset(my_dataset, 0, 1)  # 第一个元素是1的行拿出来，拿出来的行去除第一个元素
+print(my_second_dataset)
+
+my_third_dataset = split_dataset(my_dataset, 0, 0)  # 第一个元素是0的行拿出来，拿出来的行去除第一个元素
+print(my_third_dataset)
+
+my_fourth_dataset = split_dataset(my_dataset, 1, 1)  # 第二个元素是1的行拿出来，拿出来的行去除第二个元素
+print(my_fourth_dataset)
+
+my_fifth_dataset = split_dataset(my_dataset, 2, 'yes')  # 第三个元素是yes的行拿出来，拿出来的行去除第三个元素
+print(my_fifth_dataset)
+
